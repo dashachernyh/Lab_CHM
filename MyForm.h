@@ -123,6 +123,9 @@ namespace Rigid_system {
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Label^  label1;
 
+private: System::Windows::Forms::TextBox^  textBox2;
+private: System::Windows::Forms::Label^  label2;
+
 
 
 
@@ -152,6 +155,7 @@ namespace Rigid_system {
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->zedGraphControl1 = (gcnew ZedGraph::ZedGraphControl());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->LOC = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -183,6 +187,8 @@ namespace Rigid_system {
 			this->label18 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -452,15 +458,18 @@ namespace Rigid_system {
 			// label17
 			// 
 			this->label17->AutoSize = true;
-			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label17->Location = System::Drawing::Point(594, 58);
+			this->label17->Location = System::Drawing::Point(592, 48);
 			this->label17->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(295, 51);
+			this->label17->Size = System::Drawing::Size(532, 225);
 			this->label17->TabIndex = 40;
-			this->label17->Text = L"du(1)/dx=-500.005*u^((1)) + 499.995*U^((2));\ndu(2)/dx=499.995*u^((1)) - 500.005*U"
-				L"^((2));\nu^((1))(0) = u(0)_1, u^((2))(0) = u(0)_2;";
+			this->label17->Text = L"du(1)/dx=-500.005*u^((1)) + 499.995*U^((2));"
+				L"\ndu(2)/dx=499.995*u^((1)) - 500.005*U^((2));"
+				L"\nu^((1))(0) = 7, u^((2))(0) = 13;\n"
+				L"\nТочное решение для начальных условий:\nu(0)_1=7, u(0)_2=13";
+
 			// 
 			// label18
 			// 
@@ -496,11 +505,30 @@ namespace Rigid_system {
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"u(0)_1";
 			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(249, 235);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(100, 22);
+			this->textBox2->TabIndex = 43;
+			this->textBox2->Text = L"0,001";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(243, 206);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(235, 17);
+			this->label2->TabIndex = 44;
+			this->label2->Text = L"Контроль локальной погрешности";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1497, 802);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->label18);
 			this->Controls->Add(this->label17);
 			this->Controls->Add(this->label13);
@@ -553,56 +581,56 @@ namespace Rigid_system {
 		PointPairList^ f2_2_list = gcnew ZedGraph::PointPairList(); // Истинное (просто через функцию посчитать) u(2)
 
 		// Шаг по Х
-		double h = Convert::ToDouble(textBox3->Text);
+ 		double h = Convert::ToDouble(textBox3->Text);
 		double _h = Convert::ToDouble(textBox3->Text);
 		// Начальные условия U
 		double u_1 = Convert::ToDouble(textBox1->Text);
 		double u_2 = Convert::ToDouble(textBox10->Text);
 		// Максимальная погрешность
+		double eps = Convert::ToDouble(textBox2->Text);
 		// Максимальное количество шагов
 		int maxI = Convert::ToDouble(textBox9->Text);
-		double epsilon = 0.00001;
 		double xmin = 0;
 		// Границы графика
 		double xmin_limit = xmin - 0.1;
 		double xmax_limit = xmin+_h;
 
-		Pos pos(xmin, u_1, u_2);
+		Pos pos(xmin, u_1, u_2, 0);
 		double x = xmin;
 		int i = 0; // Счетчик итераций
 		dataGridView1->Rows->Clear();
 		double ymax = u_2;
 		if (ymax < u_1) ymax = u_1;
+
+		// контроль лп
+		
+		int count = -1;
 		do {
 			//Добавление на график
 			f1_list->Add(pos.x, pos.u_1);
 			f1_2_list->Add(pos.x, pos.u_2);
+			f2_list->Add(pos.x, u_1);
+			f2_2_list->Add(pos.x, u_2);
+			
 	//f1_list->Add(pos.x, pos.u);
 			//Печать в таблицу
 			dataGridView1->Rows->Add();
 			dataGridView1->Rows[i]->Cells[0]->Value = i;
 			dataGridView1->Rows[i]->Cells[1]->Value = pos.x;
-			dataGridView1->Rows[i]->Cells[2]->Value = func_ist(x).u_1;
-			dataGridView1->Rows[i]->Cells[3]->Value = func_ist(x).u_2;
+			dataGridView1->Rows[i]->Cells[2]->Value = func_ist(pos.x).u_1;
+			dataGridView1->Rows[i]->Cells[3]->Value = func_ist(pos.x).u_2;
 			dataGridView1->Rows[i]->Cells[4]->Value = pos.u_1;
 			dataGridView1->Rows[i]->Cells[5]->Value = pos.u_2;
-			dataGridView1->Rows[i]->Cells[6]->Value = fabs(func_ist(x).u_1 - pos.u_1);
-			dataGridView1->Rows[i]->Cells[7]->Value = fabs(func_ist(x).u_2 - pos.u_2);
+			dataGridView1->Rows[i]->Cells[6]->Value = func_ist(pos.x).u_1 - pos.u_1;
+			dataGridView1->Rows[i]->Cells[7]->Value = func_ist(pos.x).u_2 - pos.u_2;
 
-             x += h;
+			pos = start(pos, h, count, eps); 
 
-			pos = Method(pos, h); 
+			u_1 = func_ist(pos.x).u_1;
+			u_2 = func_ist(pos.x).u_2;
 
-			Pos prev;
-			prev.u_1 = static_cast<double>(dataGridView1->Rows[i]->Cells[4]->Value);
-			prev.u_2 = static_cast<double>(dataGridView1->Rows[i]->Cells[5]->Value);
-		  /*  if (fabs(prev.u_1 - pos.u_1) < FLT_EPSILON && fabs(prev.u_2 - pos.u_2) < FLT_EPSILON) // прошли погран слой
-			{
-				h = 2 * h;
-			}*/
-			
-			if (maxE_1 < fabs(func_ist(x).u_1 - pos.u_1)) maxE_1 = fabs(func_ist(x).u_1 - pos.u_1);
-			if (maxE_2 < fabs(func_ist(x).u_2 - pos.u_2)) maxE_2 = fabs(func_ist(x).u_2 - pos.u_2);
+			if (maxE_1 < fabs(func_ist(pos.x).u_1 - pos.u_1)) maxE_1 = fabs(func_ist(pos.x).u_1 - pos.u_1);
+			if (maxE_2 < fabs(func_ist(pos.x).u_2 - pos.u_2)) maxE_2 = fabs(func_ist(pos.x).u_2 - pos.u_2);
 			if (h > maxH) maxH = h;
 			if (h < minH) minH = h;
 			if (pos.x > xmax_limit) xmax_limit = pos.x + h;
@@ -613,22 +641,9 @@ namespace Rigid_system {
 
 
 		label11->Text ="n = " + i + "\nМаксимальный шаг " + maxH + "\nМинимальный шаг: " + minH + "\nМаксимальная глобальная ошибка шаг: " +"\nE_1 = " + maxE_1 + "\nE_2 = " + maxE_2;
-		if (true)
-		{
-			double x1 = xmin;
-			i = 0;
-			do {
-				f2_list->Add(x1, u_1);
-				f2_2_list->Add(x1, u_2);
-				x1 += _h;
-				u_1 = func_ist(x1).u_1;
-				u_2= func_ist(x1).u_2;
-				i++;
-			} while( i < maxI + 1);
-			LineItem Curve4 = panel->AddCurve("Точное решение u(1)", f2_list, Color::Blue, SymbolType::None);
-			LineItem Curve3 = panel->AddCurve("Точное решение u(2)", f2_2_list, Color::DeepSkyBlue, SymbolType::None);
-		}
 		
+		LineItem Curve4 = panel->AddCurve("Точное решение u(1)", f2_list, Color::Blue, SymbolType::None);
+		LineItem Curve3 = panel->AddCurve("Точное решение u(2)", f2_2_list, Color::DeepSkyBlue, SymbolType::None);
 		zedGraphControl1->AxisChange();
 		zedGraphControl1->Invalidate();
 		LineItem Curve1 = panel->AddCurve("Численное решение v(1)", f1_list, Color::Red, SymbolType::Plus);

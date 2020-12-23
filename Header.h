@@ -10,21 +10,28 @@ public:
 	double x;
 	double u_1;
 	double u_2;
+	double e_1, e_2;
 
 	Pos() {
 		x = 0;
 		u_1 = 0;
 		u_2 = 0;
+		e_1 = 0;
+		e_2 = 0;
 	}
-	Pos(double _x, double _u_1, double _u_2) {
+	Pos(double _x, double _u_1, double _u_2, double _e) {
 		x = _x;
 		u_1 = _u_1;
 		u_2 = _u_2;
+		e_1 = _e;
+		e_2 = _e;
 	}
 	Pos(Pos& pos) {
 		x = pos.x;
 		u_1 = pos.u_1;
 		u_2 = pos.u_2;
+		e_1 = pos.e_1;
+		e_2 = pos.e_2;
 	}
 };
 
@@ -47,8 +54,7 @@ std::vector<double> solve(std::vector<double> A, double h) {
 	}
 	return rez;
 }
-
-Pos Method( Pos pos, double h) {
+Pos Method(Pos pos, double h) {
 	std::vector<double> A = { -500.005, 499.995, 499.995, -500.005 };
 	Pos nextPos;
 	nextPos.x = pos.x + h;
@@ -59,6 +65,39 @@ Pos Method( Pos pos, double h) {
 	return nextPos;
 }
 
+
+Pos start( Pos pos, double &h, int &countDev, double eps) {
+	std::vector<double> A = { -500.005, 499.995, 499.995, -500.005 };
+	Pos nextPos;
+	
+	std::vector<double> uslovie{ 0, 0 };
+	Pos nextPos_h2 = pos;
+	double h2 = h;
+	nextPos_h2 = Method(nextPos_h2, h2);
+	countDev = -1;
+	do {
+		nextPos = nextPos_h2;
+		nextPos_h2 = pos;
+		h2 /= 2;
+
+		for (int j = 0; j < 2; j++) {
+			nextPos_h2 = Method(nextPos_h2,h2);
+		}
+		countDev++;
+		uslovie[0] = fabs(nextPos_h2.u_1 - nextPos.u_1);
+		uslovie[1] = fabs(nextPos_h2.u_2 - nextPos.u_2);
+		if (uslovie[0] > eps && uslovie[1] > eps)
+		{
+			nextPos_h2 = Method(pos, h2);
+		}
+	} while (uslovie[0] >= eps && uslovie[1]>=eps);
+
+	h = 2 * h2;
+
+	if ((uslovie[0]< eps/4 && uslovie[1] < eps/4) && countDev == 0) countDev = -1;
+	if ((uslovie[0] < eps && uslovie[1] < eps) && countDev == 0) countDev = 0;
+	return nextPos;
+}
 
 Pos func_ist(double x) {
 	std::vector<double> W1 = { -1, 1 }, W2 = { 1, 1 };

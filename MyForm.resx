@@ -117,4 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label17.Text" xml:space="preserve">
+    <value>du(1)/dx=-500.005*u^((1)) + 499.995*U^((2));
+du(2)/dx=499.995*u^((1)) - 500.005*U^((2));
+u^((1))(0) = u(0)_1, u^((2))(0) = u(0)_2;
+
+Точное решение вычисляется для начальных условий:
+u(0)_1 = 7, u(0)_2 = 13</value>
+  </data>
 </root>
