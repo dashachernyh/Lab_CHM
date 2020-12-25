@@ -155,7 +155,6 @@ private: System::Windows::Forms::Label^  label2;
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->zedGraphControl1 = (gcnew ZedGraph::ZedGraphControl());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->LOC = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -463,13 +462,11 @@ private: System::Windows::Forms::Label^  label2;
 			this->label17->Location = System::Drawing::Point(592, 48);
 			this->label17->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(532, 225);
+			this->label17->Size = System::Drawing::Size(301, 108);
 			this->label17->TabIndex = 40;
-			this->label17->Text = L"du(1)/dx=-500.005*u^((1)) + 499.995*U^((2));"
-				L"\ndu(2)/dx=499.995*u^((1)) - 500.005*U^((2));"
-				L"\nu^((1))(0) = 7, u^((2))(0) = 13;\n"
-				L"\nТочное решение для начальных условий:\nu(0)_1=7, u(0)_2=13";
-
+			this->label17->Text = L"du(1)/dx=-500.005*u^((1)) + 499.995*U^((2));\ndu(2)/dx=499.995*u^((1)) - 500.005*U"
+				L"^((2));\nu^((1))(0) = 7, u^((2))(0) = 13;\n\nТочное решение для начальных условий:\n"
+				L"u(0)_1=7, u(0)_2=13";
 			// 
 			// label18
 			// 
@@ -553,7 +550,7 @@ private: System::Windows::Forms::Label^  label2;
 			this->Controls->Add(this->zedGraphControl1);
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MyForm";
-			this->Text = L"Задача_9";
+			this->Text = L"Жесткая система. Команда 1. Черных Д.";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -624,7 +621,7 @@ private: System::Windows::Forms::Label^  label2;
 			dataGridView1->Rows[i]->Cells[6]->Value = func_ist(pos.x).u_1 - pos.u_1;
 			dataGridView1->Rows[i]->Cells[7]->Value = func_ist(pos.x).u_2 - pos.u_2;
 
-			pos = start(pos, h, count, eps); 
+			pos = start(pos, h, _h,count, eps); 
 
 			u_1 = func_ist(pos.x).u_1;
 			u_2 = func_ist(pos.x).u_2;

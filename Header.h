@@ -66,7 +66,7 @@ Pos Method(Pos pos, double h) {
 }
 
 
-Pos start( Pos pos, double &h, int &countDev, double eps) {
+Pos start( Pos pos, double &h, double _h, int &countDev, double eps) {
 	std::vector<double> A = { -500.005, 499.995, 499.995, -500.005 };
 	Pos nextPos;
 	
@@ -95,7 +95,13 @@ Pos start( Pos pos, double &h, int &countDev, double eps) {
 	h = 2 * h2;
 
 	if ((uslovie[0]< eps/4 && uslovie[1] < eps/4) && countDev == 0) countDev = -1;
-	if ((uslovie[0] < eps && uslovie[1] < eps) && countDev == 0) countDev = 0;
+	if ((uslovie[0] < eps && uslovie[1] < eps) && countDev == 0)
+	{
+		countDev = 0;
+		if (h <= _h) h = _h;
+		else
+		h = 2 * h;
+	}
 	return nextPos;
 }
 
