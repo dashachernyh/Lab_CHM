@@ -1,0 +1,29 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Graph.vcxproj, Task9.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.MetaGen.targets(91,5): warning : Отсутствует обязательный файл "C:\USERS\DASHA\DESKTOP\PROGA\чм\GRAPHICS-ZEDGRAPH12 — копия (2)\ZEDGRAPH.DLL".
+  MyForm.cpp
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(123): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(135): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(137): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(138): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(140): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(144): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(156): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(158): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(159): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(161): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(165): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(166): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(176): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\header.h(177): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(517): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(576): warning C4965: неявная упаковка целого числа 0; используйте nullptr или явное приведение типов
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(578): warning C4965: неявная упаковка целого числа 0; используйте nullptr или явное приведение типов
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(579): warning C4965: неявная упаковка целого числа 0; используйте nullptr или явное приведение типов
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(617): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(618): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(654): warning C4965: неявная упаковка целого числа 0; используйте nullptr или явное приведение типов
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(656): warning C4965: неявная упаковка целого числа 0; используйте nullptr или явное приведение типов
+c:\users\dasha\desktop\proga\чм\regional_task\myform.h(657): warning C4965: неявная упаковка целого числа 0; используйте nullptr или явное приведение типов
+  MyForm.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  MyForm.obj : юсэрЁєцхэ ьюфєы№ MSIL; фы  MSIL яюёыхфютрЄхы№эр  ъюьяюэютър юЄъы■ўхэр; т√яюыэ хЄё  яюыэр  ъюьяюэютър
+  Graph.vcxproj -> C:\Users\Dasha\Desktop\proga\чм\Regional_task\x64\Debug\Regional_task.exe

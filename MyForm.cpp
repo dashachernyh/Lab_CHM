@@ -10,6 +10,6 @@ void Main(array<String^>^ args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	Rigid_system::MyForm form;
+	Regional_task::MyForm form;
 	Application::Run(%form);
 }
