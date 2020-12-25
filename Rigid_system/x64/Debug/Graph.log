@@ -1,0 +1,5 @@
+﻿  MyForm.cpp
+c:\users\dasha\desktop\proga\rigid_system\myform.h(592): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  MyForm.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  MyForm.obj : юсэрЁєцхэ ьюфєы№ MSIL; фы  MSIL яюёыхфютрЄхы№эр  ъюьяюэютър юЄъы■ўхэр; т√яюыэ хЄё  яюыэр  ъюьяюэютър
+  Graph.vcxproj -> C:\Users\Dasha\Desktop\proga\Rigid_system\x64\Debug\Rigid_system.exe
